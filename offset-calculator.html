@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light only" />
+  <title>Offset Mortgage Calculator | offsetcalculator.com.au</title>
+  <meta name="description" content="Free Australian mortgage offset calculator. See how your offset account saves interest and cuts years off your loan." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">OffsetCalculator.com.au</a>
+  <div class="nav-links">
+    <a href="offset-calculator.html">Offset Calculator</a>
+    <a href="repayment-calculator.html">Repayment Calculator</a>
+    <a href="refinance-calculator.html">Refinance Calculator</a>
+    <a href="blog.html">Learn</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="breadcrumb container" style="text-align:left;padding-bottom:0.5rem;"><a href="index.html">Home</a> › Offset Calculator</div>
+  <h1>Mortgage <em>Offset</em> Calculator</h1>
+  <p>See exactly how your offset account saves interest and find your fastest payoff date.</p>
+</section>
+
+<div class="container"><div class="ad-slot ad-banner" style="margin-top:2rem;">Advertisement</div><div class="ad-label">Advertisement</div></div>
+
+<section class="section section-light">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start;">
+
+      <div class="calc-panel">
+        <div class="panel-title">Your Loan Details</div>
+        <label class="input-label">Loan Balance</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="loanBalance" value="695000" step="5000" /></div>
+        <label class="input-label">Offset Account Balance</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="offsetBalance" value="148000" step="1000" /></div>
+        <label class="input-label">Annual Interest Rate</label>
+        <div class="input-wrap"><input type="number" id="annualRate" value="6.20" step="0.1" min="0.1" /><span class="input-suffix">%</span></div>
+        <label class="input-label">Monthly Repayment</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="monthlyPayment" value="4160" step="100" /></div>
+        <label class="input-label">Extra Monthly Payment</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="extraMonthly" value="0" step="100" /></div>
+        <label class="input-label">Monthly Offset Top-up</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="offsetGrowth" value="0" step="100" /></div>
+        <div style="margin-top:1rem;">
+          <div class="panel-title" style="margin-bottom:0.75rem;">Quick Scenarios</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+            <button class="preset-btn" onclick="applyPreset(4160,0,0,this)">Current $4,160</button>
+            <button class="preset-btn" onclick="applyPreset(5000,0,0,this)">Middle $5,000</button>
+            <button class="preset-btn" onclick="applyPreset(6150,0,0,this)">Target $6,150</button>
+            <button class="preset-btn" onclick="applyPreset(4160,2000,500,this)">+ Extras</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;">
+          <div class="stat-card"><div class="stat-label">Payoff Time</div><div class="stat-value yellow" id="payoffTime">—</div></div>
+          <div class="stat-card red-top"><div class="stat-label">Total Interest</div><div class="stat-value red" id="totalInterest">—</div></div>
+          <div class="stat-card green-top"><div class="stat-label">Interest Saved</div><div class="stat-value green" id="interestSaved">—</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+          <div class="stat-card blue-top"><div class="stat-label">Net Interest-Bearing Balance</div><div class="stat-value" id="netBalance" style="font-size:1.2rem;">—</div></div>
+          <div class="stat-card red-top"><div class="stat-label">Monthly Interest Cost</div><div class="stat-value red" id="monthlyInterest" style="font-size:1.2rem;">—</div></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="panel-title">Balance Over Time</div>
+          <canvas id="mortgageChart" height="200"></canvas>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Year</th><th>Loan Balance</th><th>Offset</th><th>Net Balance</th><th>Cumul. Interest</th></tr></thead>
+            <tbody id="amortTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">OffsetCalculator.com.au</div><p class="footer-desc">Australia's free mortgage offset calculator.</p></div>
+    <div class="footer-col"><h4>Calculators</h4><a href="offset-calculator.html">Offset Calculator</a><a href="repayment-calculator.html">Repayment Calculator</a><a href="refinance-calculator.html">Refinance Calculator</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="blog.html">Learn</a><a href="contact.html">Contact Us</a></div>
+  </div>
+  <div class="disclaimer"><strong>Disclaimer:</strong> General information only. Not financial advice. Consult a licensed adviser.</div>
+  <div class="footer-bottom"><span>© 2025 OffsetCalculator.com.au</span><span>Privacy Policy · Terms of Use</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+let chart;
+const fmt = n => '$' + Math.round(n).toLocaleString('en-AU');
+const fmtK = n => '$' + (n/1000).toFixed(0) + 'k';
+
+function calcAmortization({loanBalance,offsetBalance,annualRate,monthlyPayment,extraMonthly,offsetGrowth}) {
+  const r = annualRate/100/12; let balance=loanBalance,offset=offsetBalance,ti=0; const data=[]; let month=0;
+  while(balance>0.01&&month<360){const net=Math.max(balance-offset,0);const interest=net*r;ti+=interest;const payment=Math.min(monthlyPayment+extraMonthly,balance+interest);balance=Math.max(balance-(payment-interest),0);offset=Math.min(offset+offsetGrowth,balance);month++;if(month%12===0||balance<=0.01)data.push({year:Math.ceil(month/12),balance:Math.round(balance),offset:Math.round(offset),net:Math.round(Math.max(balance-offset,0)),totalInterest:Math.round(ti)});if(balance<=0.01)break;}
+  return{data,months:month,totalInterest:ti};
+}
+function calcNoOffset(lb,ar,mp,em){const r=ar/100/12;let b=lb,ti=0;for(let i=0;i<360&&b>0.01;i++){const int=b*r;ti+=int;b=Math.max(b-(mp+em-int),0);}return ti;}
+function getValues(){return{loanBalance:parseFloat(document.getElementById('loanBalance').value)||0,offsetBalance:parseFloat(document.getElementById('offsetBalance').value)||0,annualRate:parseFloat(document.getElementById('annualRate').value)||0,monthlyPayment:parseFloat(document.getElementById('monthlyPayment').value)||0,extraMonthly:parseFloat(document.getElementById('extraMonthly').value)||0,offsetGrowth:parseFloat(document.getElementById('offsetGrowth').value)||0};}
+function update(){
+  const v=getValues();const{data,months,totalInterest}=calcAmortization(v);const saved=Math.max(calcNoOffset(v.loanBalance,v.annualRate,v.monthlyPayment,v.extraMonthly)-totalInterest,0);const net=Math.max(v.loanBalance-v.offsetBalance,0);const mInt=net*(v.annualRate/100/12);
+  document.getElementById('payoffTime').textContent=`${Math.floor(months/12)}y ${months%12}m`;
+  document.getElementById('totalInterest').textContent=fmt(totalInterest);
+  document.getElementById('interestSaved').textContent=fmt(saved);
+  document.getElementById('netBalance').textContent=fmt(net);
+  document.getElementById('monthlyInterest').textContent=fmt(mInt);
+  document.getElementById('amortTable').innerHTML=data.map(r=>`<tr><td>${r.year}</td><td>${fmt(r.balance)}</td><td style="color:var(--green)">${fmt(r.offset)}</td><td style="color:${r.net<200000?'var(--green)':r.net<400000?'#b97a1a':'var(--red)'}">${fmt(r.net)}</td><td style="color:var(--muted)">${fmt(r.totalInterest)}</td></tr>`).join('');
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('mortgageChart'),{type:'line',data:{labels:data.map(d=>`Yr ${d.year}`),datasets:[{label:'Loan Balance',data:data.map(d=>d.balance),borderColor:'#1D63FF',backgroundColor:'rgba(29,99,255,0.07)',borderWidth:2,pointRadius:0,tension:0.3},{label:'Offset Balance',data:data.map(d=>d.offset),borderColor:'#2a9d5c',backgroundColor:'rgba(42,157,92,0.07)',borderWidth:2,pointRadius:0,tension:0.3},{label:'Net Balance',data:data.map(d=>d.net),borderColor:'#e63946',backgroundColor:'rgba(230,57,70,0.07)',borderWidth:2,pointRadius:0,borderDash:[5,3],tension:0.3}]},options:{responsive:true,plugins:{legend:{labels:{font:{family:'DM Sans',size:11},color:'#5a6a8a'}}},scales:{x:{ticks:{font:{family:'DM Sans',size:10},color:'#5a6a8a',maxTicksLimit:10},grid:{color:'#eef2fb'}},y:{ticks:{font:{family:'DM Sans',size:10},color:'#5a6a8a',callback:fmtK},grid:{color:'#eef2fb'}}}}});
+}
+function applyPreset(p,e,g,btn){document.getElementById('monthlyPayment').value=p;document.getElementById('extraMonthly').value=e;document.getElementById('offsetGrowth').value=g;document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');update();}
+document.querySelectorAll('input[type=number]').forEach(el=>el.addEventListener('input',()=>{document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));update();}));
+update();
+</script>
+</body>
+</html>

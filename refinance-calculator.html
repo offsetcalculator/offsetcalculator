@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light only" />
+  <title>Mortgage Refinance Calculator Australia | offsetcalculator.com.au</title>
+  <meta name="description" content="Free Australian refinance calculator. See if refinancing saves you money, how long to break even, and total savings over the loan term." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">OffsetCalculator.com.au</a>
+  <div class="nav-links">
+    <a href="offset-calculator.html">Offset Calculator</a>
+    <a href="repayment-calculator.html">Repayment Calculator</a>
+    <a href="refinance-calculator.html">Refinance Calculator</a>
+    <a href="blog.html">Learn</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="breadcrumb container" style="text-align:left;padding-bottom:0.5rem;"><a href="index.html">Home</a> › Refinance Calculator</div>
+  <h1>Should You <em>Refinance?</em></h1>
+  <p>See your break-even point and exactly how much you'll save by switching to a better rate.</p>
+</section>
+
+<div class="container"><div class="ad-slot ad-banner" style="margin-top:2rem;">Advertisement</div><div class="ad-label">Advertisement</div></div>
+
+<section class="section section-light">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start;">
+
+      <div class="calc-panel">
+        <div class="panel-title">Current Loan</div>
+        <label class="input-label">Remaining Balance</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="currentBalance" value="550000" step="5000" /></div>
+        <label class="input-label">Current Interest Rate</label>
+        <div class="input-wrap"><input type="number" id="currentRate" value="6.50" step="0.05" min="0.1" /><span class="input-suffix">%</span></div>
+        <label class="input-label">Remaining Loan Term</label>
+        <div class="input-wrap"><input type="number" id="currentTerm" value="25" step="1" min="1" /><span class="input-suffix">years</span></div>
+
+        <div class="panel-title" style="margin-top:1.5rem;">New Loan</div>
+        <label class="input-label">New Interest Rate</label>
+        <div class="input-wrap"><input type="number" id="newRate" value="5.90" step="0.05" min="0.1" /><span class="input-suffix">%</span></div>
+        <label class="input-label">New Loan Term</label>
+        <div class="input-wrap"><input type="number" id="newTerm" value="25" step="1" min="1" /><span class="input-suffix">years</span></div>
+        <label class="input-label">Refinancing Costs (exit + entry fees)</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="refinanceCosts" value="3000" step="500" /></div>
+      </div>
+
+      <div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;">
+          <div class="stat-card"><div class="stat-label">Old Monthly Payment</div><div class="stat-value" id="oldPayment" style="font-size:1.2rem;color:var(--red);">—</div></div>
+          <div class="stat-card"><div class="stat-label">New Monthly Payment</div><div class="stat-value yellow" id="newPayment" style="font-size:1.2rem;">—</div></div>
+          <div class="stat-card green-top"><div class="stat-label">Monthly Saving</div><div class="stat-value green" id="monthlySaving">—</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;">
+          <div class="stat-card blue-top"><div class="stat-label">Break-Even Point</div><div class="stat-value yellow" id="breakEven" style="font-size:1.2rem;">—</div></div>
+          <div class="stat-card green-top"><div class="stat-label">Total Interest Saved</div><div class="stat-value green" id="totalSaved">—</div></div>
+          <div class="stat-card"><div class="stat-label">Worth Refinancing?</div><div class="stat-value" id="verdict" style="font-size:1.1rem;">—</div></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="panel-title">Total Cost Comparison Over Time</div>
+          <canvas id="refinanceChart" height="220"></canvas>
+        </div>
+        <div style="background:var(--cream);border-radius:12px;padding:1.5rem;border-left:4px solid var(--yellow);margin-top:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;color:var(--ink);">💡 What does break-even mean?</h3>
+          <p style="font-size:0.9rem;color:var(--muted);margin:0;">The break-even point is when your cumulative monthly savings exceed the upfront refinancing costs. After this point, every month you save money. If you plan to stay in the home beyond the break-even, refinancing makes financial sense.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">OffsetCalculator.com.au</div><p class="footer-desc">Australia's free mortgage offset calculator.</p></div>
+    <div class="footer-col"><h4>Calculators</h4><a href="offset-calculator.html">Offset Calculator</a><a href="repayment-calculator.html">Repayment Calculator</a><a href="refinance-calculator.html">Refinance Calculator</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="blog.html">Learn</a><a href="contact.html">Contact Us</a></div>
+  </div>
+  <div class="disclaimer"><strong>Disclaimer:</strong> General information only. Not financial advice.</div>
+  <div class="footer-bottom"><span>© 2025 OffsetCalculator.com.au</span><span>Privacy Policy · Terms of Use</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+let chart;
+const fmt = n => '$' + Math.round(n).toLocaleString('en-AU');
+const fmtK = n => '$' + (n/1000).toFixed(0) + 'k';
+
+function calcMonthly(balance, rate, years) {
+  const r = rate/100/12, n = years*12;
+  return balance * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+}
+function calcTotalInterest(balance, rate, years) {
+  const monthly = calcMonthly(balance, rate, years);
+  return monthly * years * 12 - balance;
+}
+
+function update() {
+  const bal = parseFloat(document.getElementById('currentBalance').value)||0;
+  const cr = parseFloat(document.getElementById('currentRate').value)||0;
+  const ct = parseFloat(document.getElementById('currentTerm').value)||25;
+  const nr = parseFloat(document.getElementById('newRate').value)||0;
+  const nt = parseFloat(document.getElementById('newTerm').value)||25;
+  const costs = parseFloat(document.getElementById('refinanceCosts').value)||0;
+  const oldM = calcMonthly(bal, cr, ct);
+  const newM = calcMonthly(bal, nr, nt);
+  const saving = oldM - newM;
+  const breakEvenMonths = saving > 0 ? Math.ceil(costs / saving) : Infinity;
+  const oldTotalInt = calcTotalInterest(bal, cr, ct);
+  const newTotalInt = calcTotalInterest(bal, nr, nt);
+  const totalSaved = oldTotalInt - newTotalInt - costs;
+  document.getElementById('oldPayment').textContent = fmt(oldM);
+  document.getElementById('newPayment').textContent = fmt(newM);
+  document.getElementById('monthlySaving').textContent = saving > 0 ? fmt(saving) : '$0';
+  document.getElementById('breakEven').textContent = saving > 0 ? `${Math.floor(breakEvenMonths/12)}y ${breakEvenMonths%12}m` : 'N/A';
+  document.getElementById('totalSaved').textContent = totalSaved > 0 ? fmt(totalSaved) : fmt(0);
+  const v = document.getElementById('verdict');
+  if (saving <= 0) { v.textContent = '❌ No'; v.style.color = 'var(--red)'; }
+  else if (breakEvenMonths <= 24) { v.textContent = '✅ Yes!'; v.style.color = 'var(--green)'; }
+  else if (breakEvenMonths <= 48) { v.textContent = '⚠️ Maybe'; v.style.color = '#b97a1a'; }
+  else { v.textContent = '⚠️ Careful'; v.style.color = '#b97a1a'; }
+
+  // Build chart data - cumulative cost comparison
+  const years = Math.max(ct, nt);
+  const labels = [], oldCumulative = [], newCumulative = [];
+  let oldCum = costs * -1, newCum = 0; // new starts in deficit by costs
+  for (let y = 1; y <= years; y++) {
+    labels.push(`Yr ${y}`);
+    oldCum += oldM * 12; newCum += newM * 12;
+    oldCumulative.push(Math.round(oldCum));
+    newCumulative.push(Math.round(newCum + costs));
+  }
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('refinanceChart'), {
+    type: 'line',
+    data: { labels, datasets: [
+      { label: 'Current Loan (total paid)', data: oldCumulative, borderColor: '#e63946', backgroundColor: 'rgba(230,57,70,0.07)', borderWidth: 2, pointRadius: 0, tension: 0.3 },
+      { label: 'Refinanced Loan (total paid)', data: newCumulative, borderColor: '#1D63FF', backgroundColor: 'rgba(29,99,255,0.07)', borderWidth: 2, pointRadius: 0, tension: 0.3 }
+    ]},
+    options: { responsive: true, plugins: { legend: { labels: { font: { family: 'DM Sans', size: 11 }, color: '#5a6a8a' } } }, scales: { x: { ticks: { font: { family: 'DM Sans', size: 10 }, color: '#5a6a8a', maxTicksLimit: 10 }, grid: { color: '#eef2fb' } }, y: { ticks: { font: { family: 'DM Sans', size: 10 }, color: '#5a6a8a', callback: fmtK }, grid: { color: '#eef2fb' } } } }
+  });
+}
+document.querySelectorAll('input[type=number]').forEach(el => el.addEventListener('input', update));
+update();
+</script>
+</body>
+</html>
