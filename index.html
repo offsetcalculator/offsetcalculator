@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offset Calculator Australia | offsetcalculator.com.au</title>
+  <meta name="description" content="Free Australian mortgage offset calculator. See exactly how your offset account saves interest and how to pay off your mortgage years early. Used by thousands of Australians." />
+  <meta name="keywords" content="offset calculator australia, mortgage offset calculator, pay off mortgage faster, offset account calculator, home loan payoff calculator australia, offsetcalculator.com.au" />
+  <meta property="og:title" content="Offset Calculator Australia | offsetcalculator.com.au" />
+  <meta property="og:description" content="See exactly how your offset account saves you interest and years off your mortgage." />
+  <meta property="og:type" content="website" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0f1f3d;
+      --paper: #f8faff;
+      --cream: #eef2fb;
+      --gold: #1a56db;
+      --gold-light: #4f7ef7;
+      --rust: #c0392b;
+      --forest: #1a7a4a;
+      --forest-light: #2ecc71;
+      --muted: #5a6a8a;
+      --border: #c5d0e8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #f8faff; color: #0f1f3d; font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; line-height: 1.7; color-scheme: light; }
+
+    /* NAV */
+    nav { background: var(--ink); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; height: 60px; }
+    .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.2rem; font-weight: 700; text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: #c8b99a; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero { background: #0f1f3d; padding: 5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, #1a3a6e 0%, transparent 70%); }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; position: relative; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; color: var(--paper); line-height: 1.1; position: relative; max-width: 760px; margin: 0 auto 1.5rem; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub { color: #a8c4e8; font-size: 1.1rem; max-width: 540px; margin: 0 auto 2.5rem; position: relative; font-weight: 300; }
+    .hero-cta { display: inline-block; background: #1a56db; color: #ffffff; padding: 0.9rem 2.5rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; font-weight: 600; transition: background 0.2s; position: relative; }
+    .hero-cta:hover { background: #4f7ef7; }
+    .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 3.5rem; position: relative; padding-top: 2.5rem; border-top: 1px solid #1e3a6e; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: #7eb3f7; font-weight: 700; }
+    .hero-stat-label { font-size: 0.78rem; color: #5a7aaa; letter-spacing: 0.08em; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; margin-top: 0.2rem; }
+
+    /* AD PLACEHOLDER */
+    .ad-slot { background: var(--cream); border: 1px dashed var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .ad-banner { height: 90px; margin: 2rem auto; max-width: 728px; }
+    .ad-sidebar { height: 250px; width: 100%; }
+    .ad-label { font-size: 0.65rem; color: var(--muted); text-align: center; margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+
+    /* LAYOUT */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 4rem 0; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 0.5rem; }
+    .section-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; font-weight: 300; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* CALCULATOR */
+    #calculator { background: var(--cream); }
+    .calc-grid { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; align-items: start; }
+    .calc-panel { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+    .input-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .input-wrap { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 1.1rem; background: var(--paper); transition: border-color 0.2s; }
+    .input-wrap:focus-within { border-color: var(--gold); }
+    .input-prefix { padding: 0.6rem 0.75rem; background: var(--cream); color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; border-right: 1px solid var(--border); }
+    .input-wrap input { border: none; outline: none; background: transparent; padding: 0.6rem 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--ink); font-weight: 600; width: 100%; }
+    .input-suffix { padding: 0.6rem 0.75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+    .preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1.25rem; }
+    .preset-btn { background: transparent; border: 1px solid var(--border); border-radius: 6px; padding: 0.55rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; cursor: pointer; color: var(--muted); transition: all 0.2s; text-align: center; }
+    .preset-btn:hover, .preset-btn.active { background: var(--gold); border-color: var(--gold); color: #ffffff; font-weight: 600; }
+    .panel-title { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .stat-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem; border-top: 3px solid var(--gold); }
+    .stat-card.danger { border-top-color: var(--rust); }
+    .stat-card.good { border-top-color: var(--forest); }
+    .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .stat-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); }
+    .stat-value.gold { color: var(--gold); }
+    .stat-value.rust { color: var(--rust); }
+    .stat-value.forest { color: var(--forest); }
+
+    /* CHART */
+    .chart-wrap { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    canvas { width: 100% !important; }
+
+    /* TABLE */
+    .table-wrap { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-height: 280px; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    thead tr { background: var(--ink); position: sticky; top: 0; }
+    thead th { padding: 0.7rem 1rem; text-align: right; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+    thead th:first-child { text-align: center; }
+    tbody tr { border-bottom: 1px solid var(--cream); }
+    tbody tr:hover { background: var(--cream); }
+    tbody td { padding: 0.6rem 1rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+    tbody td:first-child { text-align: center; color: var(--gold); font-weight: 600; }
+
+    /* BLOG */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .blog-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: white; transition: transform 0.2s, box-shadow 0.2s; }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+    .blog-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .blog-body { padding: 1.25rem; }
+    .blog-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .blog-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; }
+    .blog-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+    .blog-read { display: inline-block; margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest); text-decoration: none; border-bottom: 1px solid var(--forest-light); padding-bottom: 1px; }
+
+    /* HOW IT WORKS */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .step { text-align: center; }
+    .step-num { width: 52px; height: 52px; background: var(--gold); color: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; margin: 0 auto 1rem; }
+    .step h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.5rem; color: #0f1f3d; }
+    .step p { font-size: 0.9rem; color: #5a6a8a; font-weight: 300; }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+    .faq-q { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #0f1f3d; }
+    .faq-q::after { content: '+'; font-size: 1.4rem; color: #1a56db; font-family: 'JetBrains Mono', monospace; }
+    .faq-q.open::after { content: '−'; }
+    .faq-a { font-size: 0.95rem; color: #5a6a8a; margin-top: 0.75rem; font-weight: 300; display: none; }
+    .faq-a.open { display: block; }
+
+    /* SIDEBAR LAYOUT for blog section */
+    .content-sidebar { display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; align-items: start; }
+
+    /* FOOTER */
+    footer { background: #0f1f3d; color: #6a8ab8; padding: 3rem 2rem 2rem; }
+    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+    .footer-brand { font-family: 'Playfair Display', serif; color: #ffffff; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .footer-desc { font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
+    .footer-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: #7eb3f7; margin-bottom: 1rem; }
+    .footer-col a { display: block; color: #6a8ab8; text-decoration: none; font-size: 0.88rem; margin-bottom: 0.5rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #7eb3f7; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid #1e3a6e; font-size: 0.78rem; display: flex; justify-content: space-between; }
+    .disclaimer { max-width: 1100px; margin: 1rem auto 0; font-size: 0.75rem; color: #3a5a8a; line-height: 1.6; padding-top: 1rem; border-top: 1px solid #1e3a6e; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .calc-grid, .blog-grid, .steps, .content-sidebar, .footer-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .nav-links { display: none; }
+      .preset-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero h1, .hero-sub, .hero-cta { animation: fadeUp 0.6s ease both; }
+    .hero-sub { animation-delay: 0.1s; }
+    .hero-cta { animation-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">OffsetCalculator.com.au</a>
+  <div class="nav-links">
+    <a href="#calculator">Calculator</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#blog">Learn</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Australia's #1 Offset Mortgage Calculator — offsetcalculator.com.au</div>
+  <h1>Pay Off Your Home<br /><em>Years Earlier</em> Than You Think</h1>
+  <p class="hero-sub">See exactly how your offset account saves you interest — and find the fastest path to mortgage freedom.</p>
+  <a href="#calculator" class="hero-cta">Use the Free Calculator →</a>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">$127k</div>
+      <div class="hero-stat-label">Avg. Interest Saved</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">8.4 yrs</div>
+      <div class="hero-stat-label">Avg. Time Saved</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">Free</div>
+      <div class="hero-stat-label">Always & Forever</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOP BANNER AD -->
+<div class="container">
+  <div class="ad-slot ad-banner" style="margin-top:2rem;">
+    <!-- Google AdSense: Replace with your ad code -->
+    Advertisement
+  </div>
+  <div class="ad-label">Advertisement</div>
+</div>
+
+<!-- CALCULATOR -->
+<section class="section" id="calculator" style="background: var(--cream);">
+  <div class="container">
+    <h2 class="section-title">Offset Mortgage Calculator</h2>
+    <p class="section-sub">Enter your loan details below — results update instantly.</p>
+
+    <div class="calc-grid">
+      <!-- Inputs -->
+      <div class="calc-panel">
+        <div class="panel-title">Your Loan Details</div>
+
+        <label class="input-label">Loan Balance</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="loanBalance" value="695000" step="5000" /></div>
+
+        <label class="input-label">Offset Account Balance</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="offsetBalance" value="148000" step="1000" /></div>
+
+        <label class="input-label">Annual Interest Rate</label>
+        <div class="input-wrap"><input type="number" id="annualRate" value="6.20" step="0.1" min="0.1" /><span class="input-suffix">%</span></div>
+
+        <label class="input-label">Monthly Repayment</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="monthlyPayment" value="4160" step="100" /></div>
+
+        <label class="input-label">Extra Monthly Payment</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="extraMonthly" value="0" step="100" /></div>
+
+        <label class="input-label">Monthly Offset Top-up</label>
+        <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="offsetGrowth" value="0" step="100" /></div>
+
+        <div style="margin-top:1rem;">
+          <div class="panel-title" style="margin-bottom:0.75rem;">Quick Scenarios</div>
+          <div class="preset-grid">
+            <button class="preset-btn" onclick="applyPreset(4160,0,0)">Current $4,160</button>
+            <button class="preset-btn" onclick="applyPreset(5000,0,0)">Middle $5,000</button>
+            <button class="preset-btn" onclick="applyPreset(6150,0,0)">Target $6,150</button>
+            <button class="preset-btn" onclick="applyPreset(4160,2000,500)">$4,160 + extras</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Payoff Time</div>
+            <div class="stat-value gold" id="payoffTime">—</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Total Interest</div>
+            <div class="stat-value rust" id="totalInterest">—</div>
+          </div>
+          <div class="stat-card good">
+            <div class="stat-label">Interest Saved (offset)</div>
+            <div class="stat-value forest" id="interestSaved">—</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+          <div class="stat-card">
+            <div class="stat-label">Net Interest-Bearing Balance</div>
+            <div class="stat-value" id="netBalance" style="font-size:1.2rem;">—</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Monthly Interest Cost</div>
+            <div class="stat-value rust" id="monthlyInterest" style="font-size:1.2rem;">—</div>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="panel-title">Balance Over Time</div>
+          <canvas id="mortgageChart" height="200"></canvas>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Loan Balance</th>
+                <th>Offset</th>
+                <th>Net Balance</th>
+                <th>Cumul. Interest</th>
+              </tr>
+            </thead>
+            <tbody id="amortTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MID BANNER AD -->
+<div class="container">
+  <div class="ad-slot ad-banner">Advertisement</div>
+  <div class="ad-label">Advertisement</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works" style="background:#ffffff; color:#0f1f3d;">
+  <div class="container">
+    <h2 class="section-title" style="color:#0f1f3d;">How an Offset Account Works</h2>
+    <p class="section-sub" style="color:#5a6a8a;">The simplest wealth-building tool most Australians underuse.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Your savings sit in offset</h3>
+        <p>Instead of a regular savings account, your money lives in an offset account linked to your mortgage.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Interest calculated on the difference</h3>
+        <p>The bank only charges interest on your loan balance <em>minus</em> your offset balance — saving you money every single day.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>More of each payment hits principal</h3>
+        <p>Less interest means more of every repayment reduces your actual loan — compounding your savings over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- BLOG WITH SIDEBAR AD -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="content-sidebar">
+      <div>
+        <h2 class="section-title">Learn More</h2>
+        <p class="section-sub">Practical guides for Australian homeowners.</p>
+        <div class="blog-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="blog-card">
+            <div class="blog-img" style="background:#f2ead8;">🏠</div>
+            <div class="blog-body">
+              <div class="blog-tag">Strategy</div>
+              <div class="blog-title">The Offset Account Strategy That Saves Australians $100k+</div>
+              <div class="blog-excerpt">Most homeowners set and forget their offset. Here's the active strategy that genuinely accelerates payoff.</div>
+              <a href="#" class="blog-read">Read article →</a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img" style="background:#eaf2ea;">📊</div>
+            <div class="blog-body">
+              <div class="blog-tag">Refinancing</div>
+              <div class="blog-title">Cash-Out Refinance + Offset: The Smart Australian Playbook</div>
+              <div class="blog-excerpt">How to use a cash-out refinance strategically and why parking it in offset beats almost every alternative.</div>
+              <a href="#" class="blog-read">Read article →</a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img" style="background:#f2eaea;">💰</div>
+            <div class="blog-body">
+              <div class="blog-tag">Investing</div>
+              <div class="blog-title">Pay Off Mortgage vs Invest: The Australian Tax Angle</div>
+              <div class="blog-excerpt">The maths behind whether to invest your savings or reduce your mortgage — with Australian tax rates factored in.</div>
+              <a href="#" class="blog-read">Read article →</a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img" style="background:#eaeaf2;">🎯</div>
+            <div class="blog-body">
+              <div class="blog-tag">Planning</div>
+              <div class="blog-title">How to Pay Off a $700k Mortgage in 10 Years</div>
+              <div class="blog-excerpt">A step-by-step case study with real numbers — including the offset crossover strategy at year 11.</div>
+              <a href="#" class="blog-read">Read article →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Ad -->
+      <div style="padding-top: 5rem;">
+        <div class="ad-slot ad-sidebar">Advertisement</div>
+        <div class="ad-label">Advertisement</div>
+        <div style="margin-top:2rem;" class="ad-slot ad-sidebar">Advertisement</div>
+        <div class="ad-label">Advertisement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background: #eef2fb;" id="faq">
+  <div class="container" style="max-width: 740px;">
+    <h2 class="section-title" style="color:#0f1f3d;">Frequently Asked Questions</h2>
+    <p class="section-sub" style="color:#5a6a8a;">The questions we get asked most.</p>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Should I pay a lump sum off my mortgage or keep it in offset?</div>
+      <div class="faq-a">Keep it in the offset. The interest saving is identical, but the offset gives you full access to your money if an emergency arises. Once you pay a lump sum off the loan, it's locked away and you'd need to refinance to access it again.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What happens when my offset balance equals my loan balance?</div>
+      <div class="faq-a">You pay zero interest. Every single dollar of your monthly repayment goes directly to reducing the principal. At this point you can either continue repayments to pay it off, or withdraw from the offset to pay the loan in full and close the mortgage.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is the interest saved on an offset account tax-free?</div>
+      <div class="faq-a">Yes — and this is one of the biggest advantages. You're not earning interest (which would be taxable), you're simply reducing the interest you're charged. The saving is effectively tax-free, making the offset equivalent rate much higher than a standard savings account after tax.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How much extra should I pay per month to pay off faster?</div>
+      <div class="faq-a">Use the calculator above. For a $695k loan at 6.20% with $148k in offset, increasing repayments from $4,160 to $5,000/month cuts roughly 10 years off the loan. Even an extra $200–$500/month makes a significant difference over 20 years.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Does this calculator work for all Australian lenders?</div>
+      <div class="faq-a">Yes — the calculator uses standard principal and interest amortization with an offset deduction, which applies to all major Australian lenders including CBA, ANZ, Westpac, NAB, Macquarie, and others. Always verify with your specific lender for exact figures.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">OffsetCalculator.com.au</div>
+      <p class="footer-desc">Australia's most trusted mortgage offset calculator. Helping homeowners understand their loans and pay them off faster since 2024.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <a href="#calculator">Offset Calculator</a>
+      <a href="#">Repayment Calculator</a>
+      <a href="#">Refinance Calculator</a>
+      <a href="#">Stamp Duty Calculator</a>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <a href="#blog">Guides</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> OffsetIQ provides general information only and does not constitute financial advice. All calculations are estimates and may vary from actual lender figures. Please consult a licensed financial adviser before making financial decisions. This site may display advertisements and affiliate links.
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 OffsetCalculator.com.au. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Use</span>
+  </div>
+</footer>
+
+<!-- CHART.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+  let chart;
+
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('en-AU');
+  const fmtK = (n) => '$' + (n/1000).toFixed(0) + 'k';
+
+  function calcAmortization({ loanBalance, offsetBalance, annualRate, monthlyPayment, extraMonthly, offsetGrowth }) {
+    const r = annualRate / 100 / 12;
+    let balance = loanBalance, offset = offsetBalance, ti = 0;
+    const data = [];
+    let month = 0;
+    while (balance > 0.01 && month < 360) {
+      const net = Math.max(balance - offset, 0);
+      const interest = net * r;
+      ti += interest;
+      const payment = Math.min(monthlyPayment + extraMonthly, balance + interest);
+      const principal = payment - interest;
+      balance = Math.max(balance - principal, 0);
+      offset = Math.min(offset + offsetGrowth, balance);
+      month++;
+      if (month % 12 === 0 || balance <= 0.01) {
+        data.push({ year: Math.ceil(month/12), balance: Math.round(balance), offset: Math.round(offset), net: Math.round(Math.max(balance-offset,0)), totalInterest: Math.round(ti) });
+      }
+      if (balance <= 0.01) break;
+    }
+    return { data, months: month, totalInterest: ti };
+  }
+
+  function calcNoOffsetInterest(loanBalance, annualRate, monthlyPayment, extraMonthly) {
+    const r = annualRate / 100 / 12;
+    let b = loanBalance, ti = 0;
+    for (let i = 0; i < 360 && b > 0.01; i++) {
+      const interest = b * r;
+      ti += interest;
+      b = Math.max(b - (monthlyPayment + extraMonthly - interest), 0);
+    }
+    return ti;
+  }
+
+  function getValues() {
+    return {
+      loanBalance: parseFloat(document.getElementById('loanBalance').value) || 0,
+      offsetBalance: parseFloat(document.getElementById('offsetBalance').value) || 0,
+      annualRate: parseFloat(document.getElementById('annualRate').value) || 0,
+      monthlyPayment: parseFloat(document.getElementById('monthlyPayment').value) || 0,
+      extraMonthly: parseFloat(document.getElementById('extraMonthly').value) || 0,
+      offsetGrowth: parseFloat(document.getElementById('offsetGrowth').value) || 0,
+    };
+  }
+
+  function update() {
+    const v = getValues();
+    const { data, months, totalInterest } = calcAmortization(v);
+    const noOffInt = calcNoOffsetInterest(v.loanBalance, v.annualRate, v.monthlyPayment, v.extraMonthly);
+    const saved = noOffInt - totalInterest;
+    const net = Math.max(v.loanBalance - v.offsetBalance, 0);
+    const monthlyInt = net * (v.annualRate / 100 / 12);
+
+    const yrs = Math.floor(months/12), mths = months%12;
+    document.getElementById('payoffTime').textContent = `${yrs}y ${mths}m`;
+    document.getElementById('totalInterest').textContent = fmt(totalInterest);
+    document.getElementById('interestSaved').textContent = fmt(Math.max(saved,0));
+    document.getElementById('netBalance').textContent = fmt(net);
+    document.getElementById('monthlyInterest').textContent = fmt(monthlyInt);
+
+    // Table
+    const tbody = document.getElementById('amortTable');
+    tbody.innerHTML = data.map(r => {
+      const netColor = r.net < 200000 ? '#2d5a3d' : r.net < 400000 ? '#b97a1a' : '#b94c2a';
+      return `<tr>
+        <td>${r.year}</td>
+        <td>${fmt(r.balance)}</td>
+        <td style="color:#2d5a3d">${fmt(r.offset)}</td>
+        <td style="color:${netColor}">${fmt(r.net)}</td>
+        <td style="color:#7a6e5f">${fmt(r.totalInterest)}</td>
+      </tr>`;
+    }).join('');
+
+    // Chart
+    const labels = data.map(d => `Yr ${d.year}`);
+    if (chart) chart.destroy();
+    chart = new Chart(document.getElementById('mortgageChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Loan Balance', data: data.map(d=>d.balance), borderColor: '#1a56db', backgroundColor: 'rgba(26,86,219,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.3 },
+          { label: 'Offset Balance', data: data.map(d=>d.offset), borderColor: '#1a7a4a', backgroundColor: 'rgba(26,122,74,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.3 },
+          { label: 'Net Balance', data: data.map(d=>d.net), borderColor: '#c0392b', backgroundColor: 'rgba(192,57,43,0.08)', borderWidth: 2, pointRadius: 0, borderDash: [5,3], tension: 0.3 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: { legend: { labels: { font: { family: 'JetBrains Mono', size: 11 }, color: '#7a6e5f' } }, tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.raw)}` } } },
+        scales: {
+          x: { ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#7a6e5f', maxTicksLimit: 10 }, grid: { color: '#e8e0d0' } },
+          y: { ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#7a6e5f', callback: fmtK }, grid: { color: '#e8e0d0' } }
+        }
+      }
+    });
+  }
+
+  function applyPreset(payment, extra, growth) {
+    document.getElementById('monthlyPayment').value = payment;
+    document.getElementById('extraMonthly').value = extra;
+    document.getElementById('offsetGrowth').value = growth;
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    update();
+  }
+
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('open');
+  }
+
+  // Listen on all inputs
+  document.querySelectorAll('input[type=number]').forEach(el => el.addEventListener('input', () => { document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active')); update(); }));
+
+  update();
+</script>
+</body>
+</html>
