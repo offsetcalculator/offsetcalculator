@@ -103,8 +103,8 @@
     <div class="footer-col"><h4>Calculators</h4><a href="offset-calculator.html">Offset Calculator</a><a href="repayment-calculator.html">Repayment Calculator</a><a href="refinance-calculator.html">Refinance Calculator</a></div>
     <div class="footer-col"><h4>Company</h4><a href="blog.html">Learn</a><a href="contact.html">Contact Us</a></div>
   </div>
-  <div class="disclaimer"><strong>Disclaimer:</strong> General information only. Not financial advice.</div>
-  <div class="footer-bottom"><span>© 2025 OffsetCalculator.com.au</span><span>Privacy Policy · Terms of Use</span></div>
+  <div class="disclaimer"><strong>Not Financial Advice:</strong> General information and estimates only. Not a substitute for professional advice. <a href="disclaimer.html" style="color:#5a8aaa;">Full Disclaimer →</a></div>
+  <div class="footer-bottom"><span>© 2025 OffsetCalculator.com.au</span><span><a href="disclaimer.html" style="color:#4a6a8a;">Disclaimer</a> · Privacy Policy · Terms of Use</span></div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -152,7 +152,7 @@ function update() {
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById('repaymentChart'), {
     type: 'bar',
-    data: { labels: yearData.map(d=>`Yr ${d.year}`), datasets: [{ label: 'Principal', data: yearData.map(d=>d.annPrincipal), backgroundColor: '#1D63FF', borderRadius: 3 }, { label: 'Interest', data: yearData.map(d=>d.annInterest), backgroundColor: '#FFCE32', borderRadius: 3 }] },
+    data: { labels: yearData.map(d=>`Yr ${d.year}`), datasets: [{ label: 'Principal', data: yearData.map(d=>d.annPrincipal), backgroundColor: '#4ABDAC', borderRadius: 3 }, { label: 'Interest', data: yearData.map(d=>d.annInterest), backgroundColor: '#FFCE32', borderRadius: 3 }] },
     options: { responsive: true, plugins: { legend: { labels: { font: { family: 'DM Sans', size: 11 }, color: '#5a6a8a' } } }, scales: { x: { stacked: true, ticks: { font: { family: 'DM Sans', size: 10 }, color: '#5a6a8a', maxTicksLimit: 10 }, grid: { display: false } }, y: { stacked: true, ticks: { font: { family: 'DM Sans', size: 10 }, color: '#5a6a8a', callback: fmtK }, grid: { color: '#eef2fb' } } } }
   });
 }
