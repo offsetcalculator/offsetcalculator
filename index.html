@@ -8,6 +8,11 @@
   <meta name="description" content="Free Australian mortgage offset calculator. See exactly how your offset account saves interest and pay off your home years early." />
   <meta name="keywords" content="offset calculator australia, mortgage offset calculator, pay off mortgage faster, offset account calculator, home loan calculator australia" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Make entire card clickable */
+    .card-link { text-decoration: none; color: inherit; display: block; }
+    .card-link .card { height: 100%; }
+  </style>
 </head>
 <body>
 
@@ -28,7 +33,7 @@
   <h1>Pay Off Your Home<br /><em>Years Earlier</em> Than You Think</h1>
   <p class="hero-sub">See exactly how your offset account saves you interest — and find the fastest path to mortgage freedom.</p>
   <a href="offset-calculator.html" class="btn-primary" style="margin-right:1rem;">Use the Offset Calculator →</a>
-  <a href="repayment-calculator.html" class="btn-secondary" style="color:var(--yellow);border-color:var(--yellow);">Repayment Calculator</a>
+  <a href="repayment-calculator.html" class="btn-secondary">Repayment Calculator</a>
   <div class="hero-stats">
     <div><div class="hero-stat-num">$127k</div><div class="hero-stat-label">Avg. Interest Saved</div></div>
     <div><div class="hero-stat-num">8.4 yrs</div><div class="hero-stat-label">Avg. Time Saved</div></div>
@@ -39,67 +44,73 @@
 <!-- AD -->
 <div class="container"><div class="ad-slot ad-banner" style="margin-top:2rem;"><!-- Google AdSense code here --> Advertisement</div><div class="ad-label">Advertisement</div></div>
 
-<!-- CALCULATORS GRID -->
+<!-- CALCULATORS GRID — fully clickable cards -->
 <section class="section">
   <div class="container">
     <h2 class="section-title">Our Free Calculators</h2>
     <p class="section-sub">Everything you need to plan your mortgage payoff strategy.</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
 
-      <div class="card">
-        <div class="blog-img" style="background:var(--cream);">🏦</div>
-        <div class="card-body">
-          <div class="blog-tag">Most Popular</div>
-          <div class="blog-title">Offset Calculator</div>
-          <p class="blog-excerpt">See exactly how your offset account reduces interest and cuts years off your loan.</p>
-          <a href="offset-calculator.html" class="blog-read">Use Calculator →</a>
+      <a href="offset-calculator.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:var(--cream);font-size:3.5rem;">🏦</div>
+          <div class="card-body">
+            <div class="blog-tag">Most Popular</div>
+            <div class="blog-title">Offset Calculator</div>
+            <p class="blog-excerpt">See exactly how your offset account reduces interest and cuts years off your loan.</p>
+            <span class="blog-read">Use Calculator →</span>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div class="card">
-        <div class="blog-img" style="background:var(--light);">📅</div>
-        <div class="card-body">
-          <div class="blog-tag">Essential Tool</div>
-          <div class="blog-title">Repayment Calculator</div>
-          <p class="blog-excerpt">Find out exactly what your monthly repayments will be and how extra payments save you money.</p>
-          <a href="repayment-calculator.html" class="blog-read">Use Calculator →</a>
+      <a href="repayment-calculator.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:var(--light);font-size:3.5rem;">📅</div>
+          <div class="card-body">
+            <div class="blog-tag">Essential Tool</div>
+            <div class="blog-title">Repayment Calculator</div>
+            <p class="blog-excerpt">Find out exactly what your monthly repayments will be and how extra payments save you money.</p>
+            <span class="blog-read">Use Calculator →</span>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div class="card">
-        <div class="blog-img" style="background:#fff8e1;">🔄</div>
-        <div class="card-body">
-          <div class="blog-tag">Save Thousands</div>
-          <div class="blog-title">Refinance Calculator</div>
-          <p class="blog-excerpt">Should you refinance? See the break-even point and total savings from switching lenders.</p>
-          <a href="refinance-calculator.html" class="blog-read">Use Calculator →</a>
+      <a href="refinance-calculator.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:#fff8e1;font-size:3.5rem;">🔄</div>
+          <div class="card-body">
+            <div class="blog-tag">Save Thousands</div>
+            <div class="blog-title">Refinance Calculator</div>
+            <p class="blog-excerpt">Should you refinance? See the break-even point and total savings from switching lenders.</p>
+            <span class="blog-read">Use Calculator →</span>
+          </div>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="section section-yellow" id="how-it-works">
+<section class="section" id="how-it-works" style="background:var(--teal-deep);">
   <div class="container">
-    <h2 class="section-title" style="color:var(--ink);">How an Offset Account Works</h2>
-    <p class="section-sub" style="color:#5a4a00;">The simplest wealth-building tool most Australians underuse.</p>
+    <h2 class="section-title" style="color:#ffffff;">How an Offset Account Works</h2>
+    <p class="section-sub" style="color:#a8ddd8;">The simplest wealth-building tool most Australians underuse.</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
       <div style="text-align:center;">
-        <div style="width:56px;height:56px;background:var(--blue-deep);color:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin:0 auto 1rem;">1</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:var(--ink);">Your savings sit in offset</h3>
-        <p style="font-size:0.9rem;color:#5a4a00;">Instead of a regular savings account, your money lives in an offset account linked to your mortgage.</p>
+        <div class="step-num">1</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:#ffffff;">Your savings sit in offset</h3>
+        <p style="font-size:0.9rem;color:#a8ddd8;">Instead of a regular savings account, your money lives in an offset account linked to your mortgage.</p>
       </div>
       <div style="text-align:center;">
-        <div style="width:56px;height:56px;background:var(--blue-deep);color:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin:0 auto 1rem;">2</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:var(--ink);">Interest calculated on the difference</h3>
-        <p style="font-size:0.9rem;color:#5a4a00;">The bank only charges interest on your loan balance <em>minus</em> your offset balance — saving you money every single day.</p>
+        <div class="step-num">2</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:#ffffff;">Interest calculated on the difference</h3>
+        <p style="font-size:0.9rem;color:#a8ddd8;">The bank only charges interest on your loan balance <em>minus</em> your offset balance — saving you money every single day.</p>
       </div>
       <div style="text-align:center;">
-        <div style="width:56px;height:56px;background:var(--blue-deep);color:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin:0 auto 1rem;">3</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:var(--ink);">More of each payment hits principal</h3>
-        <p style="font-size:0.9rem;color:#5a4a00;">Less interest means more of every repayment reduces your actual loan — compounding your savings over time.</p>
+        <div class="step-num">3</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:#ffffff;">More of each payment hits principal</h3>
+        <p style="font-size:0.9rem;color:#a8ddd8;">Less interest means more of every repayment reduces your actual loan — compounding your savings over time.</p>
       </div>
     </div>
   </div>
@@ -108,60 +119,58 @@
 <!-- BLOG PREVIEW -->
 <section class="section section-light">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 300px;gap:2.5rem;align-items:start;">
-      <div>
-        <h2 class="section-title">Learn More</h2>
-        <p class="section-sub">Practical guides for Australian homeowners.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <h2 class="section-title">Learn More</h2>
+    <p class="section-sub">Practical guides for Australian homeowners.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;">
 
-          <div class="card">
-            <div class="blog-img" style="background:var(--cream);">🏠</div>
-            <div class="card-body">
-              <div class="blog-tag">Strategy</div>
-              <div class="blog-title">The Offset Account Strategy That Saves Australians $100k+</div>
-              <div class="blog-excerpt">Most homeowners set and forget their offset. Here's the active strategy that genuinely accelerates payoff.</div>
-              <a href="blog-offset-strategy.html" class="blog-read">Read article →</a>
-            </div>
+      <a href="blog-offset-strategy.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:var(--cream);">🏠</div>
+          <div class="card-body">
+            <div class="blog-tag">Strategy</div>
+            <div class="blog-title">The Offset Account Strategy That Saves Australians $100k+</div>
+            <div class="blog-excerpt">Most homeowners set and forget their offset. Here's the active strategy that genuinely accelerates payoff.</div>
+            <span class="blog-read">Read article →</span>
           </div>
-
-          <div class="card">
-            <div class="blog-img" style="background:var(--light);">📊</div>
-            <div class="card-body">
-              <div class="blog-tag">Refinancing</div>
-              <div class="blog-title">Cash-Out Refinance + Offset: The Smart Australian Playbook</div>
-              <div class="blog-excerpt">How to use a cash-out refinance strategically and why parking it in offset beats almost every alternative.</div>
-              <a href="blog-cashout-refinance.html" class="blog-read">Read article →</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="blog-img" style="background:#fff0f0;">💰</div>
-            <div class="card-body">
-              <div class="blog-tag">Investing</div>
-              <div class="blog-title">Pay Off Mortgage vs Invest: The Australian Tax Angle</div>
-              <div class="blog-excerpt">The maths behind whether to invest your savings or reduce your mortgage — with Australian tax rates factored in.</div>
-              <a href="blog-payoff-vs-invest.html" class="blog-read">Read article →</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="blog-img" style="background:#f0f0ff;">🎯</div>
-            <div class="card-body">
-              <div class="blog-tag">Planning</div>
-              <div class="blog-title">How to Pay Off a $700k Mortgage in 10 Years</div>
-              <div class="blog-excerpt">A step-by-step case study with real numbers — including the offset crossover strategy at year 11.</div>
-              <a href="blog-700k-mortgage.html" class="blog-read">Read article →</a>
-            </div>
-          </div>
-
         </div>
-      </div>
-      <div style="padding-top:5rem;">
-        <div class="ad-slot ad-sidebar">Advertisement</div>
-        <div class="ad-label">Advertisement</div>
-        <div style="margin-top:1.5rem;" class="ad-slot ad-sidebar">Advertisement</div>
-        <div class="ad-label">Advertisement</div>
-      </div>
+      </a>
+
+      <a href="blog-cashout-refinance.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:var(--light);">📊</div>
+          <div class="card-body">
+            <div class="blog-tag">Refinancing</div>
+            <div class="blog-title">Cash-Out Refinance + Offset: The Smart Australian Playbook</div>
+            <div class="blog-excerpt">How to use a cash-out refinance strategically and why parking it in offset beats almost every alternative.</div>
+            <span class="blog-read">Read article →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog-payoff-vs-invest.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:#fff0f0;">💰</div>
+          <div class="card-body">
+            <div class="blog-tag">Investing</div>
+            <div class="blog-title">Pay Off Mortgage vs Invest: The Australian Tax Angle</div>
+            <div class="blog-excerpt">The maths behind whether to invest your savings or reduce your mortgage — with Australian tax rates factored in.</div>
+            <span class="blog-read">Read article →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog-700k-mortgage.html" class="card-link">
+        <div class="card">
+          <div class="blog-img" style="background:#f0f0ff;">🎯</div>
+          <div class="card-body">
+            <div class="blog-tag">Planning</div>
+            <div class="blog-title">How to Pay Off a $700k Mortgage in 10 Years</div>
+            <div class="blog-excerpt">A step-by-step case study with real numbers — including the offset crossover strategy at year 11.</div>
+            <span class="blog-read">Read article →</span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -192,17 +201,18 @@
       <a href="refinance-calculator.html">Refinance Calculator</a>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4>Links</h4>
       <a href="blog.html">Learn</a>
       <a href="contact.html">Contact Us</a>
+      <a href="disclaimer.html">Disclaimer</a>
     </div>
   </div>
   <div class="disclaimer">
-    <strong>Disclaimer:</strong> OffsetCalculator.com.au provides general information only and does not constitute financial advice. All calculations are estimates only. Please consult a licensed financial adviser before making financial decisions.
+    <strong>Not Financial Advice:</strong> offsetcalculator.com.au provides general information and calculator estimates only. This is <strong>not financial advice</strong>. All results are estimates only. Please consult a licensed financial adviser, mortgage broker, or accountant before making any financial decisions. <a href="disclaimer.html" style="color:#5a9a94;">Full Disclaimer →</a>
   </div>
   <div class="footer-bottom">
     <span>© 2025 OffsetCalculator.com.au. All rights reserved.</span>
-    <span><a href="disclaimer.html" style="color:#4a6a8a;">Disclaimer</a> · Privacy Policy · Terms of Use</span>
+    <span><a href="disclaimer.html" style="color:#4a8a84;">Disclaimer</a> · Privacy Policy · Terms of Use</span>
   </div>
 </footer>
 
