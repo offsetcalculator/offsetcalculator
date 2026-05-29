@@ -13,12 +13,13 @@
   --blue-deep: #0a2560;
   --ink: #0d1f3c;
   --paper: #ffffff;
-  --cream: #fffbee;
-  --light: #f4f7ff;
+  --cream: #f0faf8;
+  --light: #e8f8f5;
   --muted: #5a6a8a;
-  --border: #dde4f5;
-  --red: #e63946;
-  --green: #2a9d5c;
+  --border: #c8e8e2;
+  --red: #FC4A1A;
+  --green: #4ABDAC;
+  --sunshine: #F7B733;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -174,4 +175,72 @@ footer { background: var(--blue-deep); color: #6a8ab8; padding: 3.5rem 2rem 2rem
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .hero-stats { gap: 1.5rem; }
+
+  /* Fix all grids to single column on mobile */
+  .calc-grid,
+  .content-sidebar,
+  [style*="grid-template-columns: 1fr 300px"],
+  [style*="grid-template-columns: 1fr 280px"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: repeat(3, 1fr)"],
+  [style*="grid-template-columns: repeat(2, 1fr)"],
+  [style*="grid-template-columns: 2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hide sidebar ads on mobile */
+  .ad-sidebar { display: none; }
+
+  /* Stats row 2 columns on mobile */
+  .stats-row { grid-template-columns: 1fr 1fr !important; }
+
+  /* Hero adjustments */
+  .hero { padding: 3rem 1.25rem 2.5rem; }
+  .hero h1 { font-size: 2rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .btn-primary, .btn-secondary { display: block; width: 100%; text-align: center; margin: 0.5rem 0 !important; }
+
+  /* Section padding */
+  .section { padding: 2.5rem 0; }
+  .container, .container-sm { padding: 0 1rem; }
+
+  /* Page hero */
+  .page-hero { padding: 2rem 1.25rem; }
+  .page-hero h1 { font-size: 1.7rem; }
+
+  /* Calculator panel full width */
+  .calc-panel { margin-bottom: 1.5rem; }
+
+  /* Table scroll on mobile */
+  .table-wrap { overflow-x: auto; }
+  table { min-width: 500px; }
+
+  /* Blog cards */
+  .card { margin-bottom: 0; }
+
+  /* Contact form grid */
+  .contact-grid { grid-template-columns: 1fr !important; }
+
+  /* Step numbers */
+  .step-num { margin: 0 auto 1rem; }
+
+  /* Ad banner smaller on mobile */
+  .ad-banner { height: 60px; }
+
+  /* Stat cards font size */
+  .stat-value { font-size: 1.2rem !important; }
+
+  /* Nav logo smaller */
+  .nav-logo { font-size: 0.95rem; }
+
+  /* Footer */
+  footer { padding: 2rem 1.25rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.7rem; }
+  .section-title { font-size: 1.4rem; }
+  .stats-row { grid-template-columns: 1fr !important; }
+  .hero-stats { gap: 1rem; }
+  .hero-stat-num { font-size: 1.5rem; }
 }
