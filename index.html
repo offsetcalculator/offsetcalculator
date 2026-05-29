@@ -8,11 +8,6 @@
   <meta name="description" content="Free Australian mortgage offset calculator. See exactly how your offset account saves interest and pay off your home years early." />
   <meta name="keywords" content="offset calculator australia, mortgage offset calculator, pay off mortgage faster, offset account calculator, home loan calculator australia" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Make entire card clickable */
-    .card-link { text-decoration: none; color: inherit; display: block; }
-    .card-link .card { height: 100%; }
-  </style>
 </head>
 <body>
 
@@ -35,16 +30,25 @@
   <a href="offset-calculator.html" class="btn-primary" style="margin-right:1rem;">Use the Offset Calculator →</a>
   <a href="repayment-calculator.html" class="btn-secondary">Repayment Calculator</a>
   <div class="hero-stats">
-    <div><div class="hero-stat-num">$127k</div><div class="hero-stat-label">Avg. Interest Saved</div></div>
-    <div><div class="hero-stat-num">8.4 yrs</div><div class="hero-stat-label">Avg. Time Saved</div></div>
-    <div><div class="hero-stat-num">Free</div><div class="hero-stat-label">Always & Forever</div></div>
+    <div class="hero-stat-box">
+      <div class="hero-stat-num">$127k</div>
+      <div class="hero-stat-label">Avg. Interest Saved</div>
+    </div>
+    <div class="hero-stat-box">
+      <div class="hero-stat-num">8.4 yrs</div>
+      <div class="hero-stat-label">Avg. Time Saved</div>
+    </div>
+    <div class="hero-stat-box">
+      <div class="hero-stat-num">Free</div>
+      <div class="hero-stat-label">Always & Forever</div>
+    </div>
   </div>
 </section>
 
 <!-- AD -->
-<div class="container"><div class="ad-slot ad-banner" style="margin-top:2rem;"><!-- Google AdSense code here --> Advertisement</div><div class="ad-label">Advertisement</div></div>
+<div class="container"><div class="ad-slot ad-banner" style="margin-top:2rem;"><!-- Google AdSense --> Advertisement</div><div class="ad-label">Advertisement</div></div>
 
-<!-- CALCULATORS GRID — fully clickable cards -->
+<!-- CALCULATORS GRID -->
 <section class="section">
   <div class="container">
     <h2 class="section-title">Our Free Calculators</h2>
@@ -53,7 +57,7 @@
 
       <a href="offset-calculator.html" class="card-link">
         <div class="card">
-          <div class="blog-img" style="background:var(--cream);font-size:3.5rem;">🏦</div>
+          <div class="blog-img" style="background:var(--yellow-pale);font-size:3.5rem;">🏦</div>
           <div class="card-body">
             <div class="blog-tag">Most Popular</div>
             <div class="blog-title">Offset Calculator</div>
@@ -65,7 +69,7 @@
 
       <a href="repayment-calculator.html" class="card-link">
         <div class="card">
-          <div class="blog-img" style="background:var(--light);font-size:3.5rem;">📅</div>
+          <div class="blog-img" style="background:#e8f5e9;font-size:3.5rem;">📅</div>
           <div class="card-body">
             <div class="blog-tag">Essential Tool</div>
             <div class="blog-title">Repayment Calculator</div>
@@ -92,32 +96,32 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="section" id="how-it-works" style="background:var(--teal-deep);">
+<section class="section section-white" id="how-it-works">
   <div class="container">
-    <h2 class="section-title" style="color:#ffffff;">How an Offset Account Works</h2>
-    <p class="section-sub" style="color:#a8ddd8;">The simplest wealth-building tool most Australians underuse.</p>
+    <h2 class="section-title">How an Offset Account Works</h2>
+    <p class="section-sub">The simplest wealth-building tool most Australians underuse.</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
-      <div style="text-align:center;">
+      <div style="text-align:center;background:var(--yellow-pale);border-radius:20px;padding:2rem;">
         <div class="step-num">1</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:#ffffff;">Your savings sit in offset</h3>
-        <p style="font-size:0.9rem;color:#a8ddd8;">Instead of a regular savings account, your money lives in an offset account linked to your mortgage.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:var(--ink);">Your savings sit in offset</h3>
+        <p style="font-size:0.9rem;color:var(--muted);">Instead of a regular savings account, your money lives in an offset account linked to your mortgage.</p>
       </div>
-      <div style="text-align:center;">
+      <div style="text-align:center;background:var(--yellow-pale);border-radius:20px;padding:2rem;">
         <div class="step-num">2</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:#ffffff;">Interest calculated on the difference</h3>
-        <p style="font-size:0.9rem;color:#a8ddd8;">The bank only charges interest on your loan balance <em>minus</em> your offset balance — saving you money every single day.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:var(--ink);">Interest on the difference only</h3>
+        <p style="font-size:0.9rem;color:var(--muted);">The bank only charges interest on your loan balance <em>minus</em> your offset balance — saving you money every single day.</p>
       </div>
-      <div style="text-align:center;">
+      <div style="text-align:center;background:var(--yellow-pale);border-radius:20px;padding:2rem;">
         <div class="step-num">3</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:#ffffff;">More of each payment hits principal</h3>
-        <p style="font-size:0.9rem;color:#a8ddd8;">Less interest means more of every repayment reduces your actual loan — compounding your savings over time.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.5rem;color:var(--ink);">More of each payment hits principal</h3>
+        <p style="font-size:0.9rem;color:var(--muted);">Less interest means more of every repayment reduces your actual loan — compounding your savings over time.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- BLOG PREVIEW -->
-<section class="section section-light">
+<section class="section section-yellow">
   <div class="container">
     <h2 class="section-title">Learn More</h2>
     <p class="section-sub">Practical guides for Australian homeowners.</p>
@@ -125,7 +129,7 @@
 
       <a href="blog-offset-strategy.html" class="card-link">
         <div class="card">
-          <div class="blog-img" style="background:var(--cream);">🏠</div>
+          <div class="blog-img" style="background:var(--yellow-pale);">🏠</div>
           <div class="card-body">
             <div class="blog-tag">Strategy</div>
             <div class="blog-title">The Offset Account Strategy That Saves Australians $100k+</div>
@@ -137,11 +141,11 @@
 
       <a href="blog-cashout-refinance.html" class="card-link">
         <div class="card">
-          <div class="blog-img" style="background:var(--light);">📊</div>
+          <div class="blog-img" style="background:#e8f5e9;">📊</div>
           <div class="card-body">
             <div class="blog-tag">Refinancing</div>
             <div class="blog-title">Cash-Out Refinance + Offset: The Smart Australian Playbook</div>
-            <div class="blog-excerpt">How to use a cash-out refinance strategically and why parking it in offset beats almost every alternative.</div>
+            <div class="blog-excerpt">How to use a cash-out refinance and why parking it in offset beats almost every alternative.</div>
             <span class="blog-read">Read article →</span>
           </div>
         </div>
@@ -149,11 +153,11 @@
 
       <a href="blog-payoff-vs-invest.html" class="card-link">
         <div class="card">
-          <div class="blog-img" style="background:#fff0f0;">💰</div>
+          <div class="blog-img" style="background:#ffebee;">💰</div>
           <div class="card-body">
             <div class="blog-tag">Investing</div>
             <div class="blog-title">Pay Off Mortgage vs Invest: The Australian Tax Angle</div>
-            <div class="blog-excerpt">The maths behind whether to invest your savings or reduce your mortgage — with Australian tax rates factored in.</div>
+            <div class="blog-excerpt">The maths behind whether to invest your savings or reduce your mortgage — with Australian tax rates.</div>
             <span class="blog-read">Read article →</span>
           </div>
         </div>
@@ -161,11 +165,11 @@
 
       <a href="blog-700k-mortgage.html" class="card-link">
         <div class="card">
-          <div class="blog-img" style="background:#f0f0ff;">🎯</div>
+          <div class="blog-img" style="background:#f3e5f5;">🎯</div>
           <div class="card-body">
             <div class="blog-tag">Planning</div>
             <div class="blog-title">How to Pay Off a $700k Mortgage in 10 Years</div>
-            <div class="blog-excerpt">A step-by-step case study with real numbers — including the offset crossover strategy at year 11.</div>
+            <div class="blog-excerpt">A step-by-step case study with real numbers — including the offset crossover strategy.</div>
             <span class="blog-read">Read article →</span>
           </div>
         </div>
@@ -176,14 +180,14 @@
 </section>
 
 <!-- FAQ -->
-<section class="section" id="faq" style="background:#ffffff;">
+<section class="section section-yellow" id="faq">
   <div class="container-sm">
     <h2 class="section-title">Frequently Asked Questions</h2>
     <p class="section-sub">The questions we get asked most.</p>
     <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Should I pay a lump sum off my mortgage or keep it in offset?</div><div class="faq-a">Keep it in the offset. The interest saving is identical, but the offset gives you full access to your money if an emergency arises. Once you pay a lump sum off the loan, it's locked away and you'd need to refinance to access it again.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What happens when my offset balance equals my loan balance?</div><div class="faq-a">You pay zero interest. Every single dollar of your monthly repayment goes directly to reducing the principal. At this point you can either continue repayments to pay it off, or withdraw from the offset to pay the loan in full and close the mortgage.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is the interest saved on an offset account tax-free?</div><div class="faq-a">Yes — and this is one of the biggest advantages. You're not earning interest (which would be taxable), you're simply reducing the interest you're charged. The saving is effectively tax-free, making the offset equivalent rate much higher than a standard savings account after tax.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does this calculator work for all Australian lenders?</div><div class="faq-a">Yes — the calculator uses standard principal and interest amortisation with an offset deduction, which applies to all major Australian lenders including CBA, ANZ, Westpac, NAB, Macquarie, and others. Always verify with your specific lender for exact figures.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What happens when my offset balance equals my loan balance?</div><div class="faq-a">You pay zero interest. Every single dollar of your monthly repayment goes directly to reducing the principal. You can then withdraw the offset funds, pay the loan off entirely, and own your home outright.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is the interest saved on an offset account tax-free?</div><div class="faq-a">Yes — you're not earning interest (which would be taxable), you're simply reducing the interest you're charged. The saving is effectively tax-free, making the offset rate much higher than a savings account after tax.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does this calculator work for all Australian lenders?</div><div class="faq-a">Yes — it uses standard principal and interest amortisation with an offset deduction, applying to all major lenders including CBA, ANZ, Westpac, NAB and Macquarie. Always verify exact figures with your lender.</div></div>
   </div>
 </section>
 
@@ -192,7 +196,7 @@
   <div class="footer-grid">
     <div>
       <div class="footer-brand">OffsetCalculator.com.au</div>
-      <p class="footer-desc">Australia's free mortgage offset calculator. Helping homeowners understand their loans and pay them off faster.</p>
+      <p class="footer-desc">Australia's free mortgage offset calculator. Helping homeowners pay off their loans faster.</p>
     </div>
     <div class="footer-col">
       <h4>Calculators</h4>
@@ -208,11 +212,11 @@
     </div>
   </div>
   <div class="disclaimer">
-    <strong>Not Financial Advice:</strong> offsetcalculator.com.au provides general information and calculator estimates only. This is <strong>not financial advice</strong>. All results are estimates only. Please consult a licensed financial adviser, mortgage broker, or accountant before making any financial decisions. <a href="disclaimer.html" style="color:#5a9a94;">Full Disclaimer →</a>
+    <strong>Not Financial Advice:</strong> offsetcalculator.com.au provides general information and estimates only. Not a substitute for professional advice. <a href="disclaimer.html" style="color:#5a5a7a;">Full Disclaimer →</a>
   </div>
   <div class="footer-bottom">
     <span>© 2025 OffsetCalculator.com.au. All rights reserved.</span>
-    <span><a href="disclaimer.html" style="color:#4a8a84;">Disclaimer</a> · Privacy Policy · Terms of Use</span>
+    <span><a href="disclaimer.html" style="color:#5a5a7a;">Disclaimer</a> · Privacy Policy · Terms of Use</span>
   </div>
 </footer>
 
