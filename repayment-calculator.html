@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light only" />
   <title>Mortgage Repayment Calculator Australia | offsetcalculator.com.au</title>
-  <meta name="description" content="Free Australian mortgage repayment calculator. Find your monthly repayments and see how extra payments save thousands in interest." />
+  <meta name="description" content="Free Australian mortgage repayment calculator. Calculate monthly, fortnightly or weekly repayments and see how extra payments save thousands in interest." />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .freq-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .freq-tab { flex: 1; padding: 0.6rem; border: 2px solid var(--border); border-radius: 10px; background: var(--yellow-pale); font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; color: var(--ink); }
+    .freq-tab.active { background: var(--green); border-color: var(--green); color: white; }
+    .freq-tab:hover:not(.active) { border-color: var(--green); }
+    .saving-badge { background: #e8f5e9; color: var(--green); font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; margin-left: 0.5rem; }
+  </style>
 </head>
 <body>
 
@@ -24,53 +31,116 @@
 <section class="page-hero">
   <div class="breadcrumb container" style="text-align:left;padding-bottom:0.5rem;"><a href="index.html">Home</a> › Repayment Calculator</div>
   <h1>Mortgage <em>Repayment</em> Calculator</h1>
-  <p>Find your monthly repayments and see exactly how extra payments cut years off your loan.</p>
+  <p>Calculate monthly, fortnightly or weekly repayments — and see exactly how extra payments cut years off your loan.</p>
 </section>
 
-<div class="container"><div class="ad-slot ad-banner" style="margin-top:2rem;">Advertisement</div><div class="ad-label">Advertisement</div></div>
-
-<section class="section section-light">
+<section class="section" style="background:var(--yellow);">
   <div class="container">
-    <div style="display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start;">
+    <div style="display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start;min-width:0;">
 
+      <!-- INPUT PANEL -->
       <div class="calc-panel">
         <div class="panel-title">Loan Details</div>
+
         <label class="input-label">Loan Amount</label>
         <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="loanAmount" value="600000" step="5000" /></div>
+
         <label class="input-label">Annual Interest Rate</label>
-        <div class="input-wrap"><input type="number" id="interestRate" value="6.20" step="0.1" min="0.1" /><span class="input-suffix">%</span></div>
+        <div class="input-wrap"><input type="number" id="interestRate" value="6.20" step="0.05" min="0.1" /><span class="input-suffix">%</span></div>
+
         <label class="input-label">Loan Term</label>
         <div class="input-wrap"><input type="number" id="loanTerm" value="30" step="1" min="1" max="30" /><span class="input-suffix">years</span></div>
-        <label class="input-label">Extra Monthly Repayment</label>
+
+        <label class="input-label">Repayment Frequency</label>
+        <div class="freq-tabs">
+          <div class="freq-tab active" onclick="setFreq('monthly', this)">Monthly</div>
+          <div class="freq-tab" onclick="setFreq('fortnightly', this)">Fortnightly</div>
+          <div class="freq-tab" onclick="setFreq('weekly', this)">Weekly</div>
+        </div>
+
+        <label class="input-label">Extra Repayment (per period)</label>
         <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="extraRepayment" value="0" step="100" /></div>
+
         <div style="margin-top:1rem;">
-          <div class="panel-title" style="margin-bottom:0.75rem;">Extra Payment Scenarios</div>
+          <div class="panel-title" style="margin-bottom:0.75rem;">Quick Extra Payments</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
             <button class="preset-btn" onclick="applyExtra(0,this)">No Extra</button>
-            <button class="preset-btn" onclick="applyExtra(200,this)">+$200/mo</button>
-            <button class="preset-btn" onclick="applyExtra(500,this)">+$500/mo</button>
-            <button class="preset-btn" onclick="applyExtra(1000,this)">+$1,000/mo</button>
+            <button class="preset-btn" onclick="applyExtra(200,this)">+$200</button>
+            <button class="preset-btn" onclick="applyExtra(500,this)">+$500</button>
+            <button class="preset-btn" onclick="applyExtra(1000,this)">+$1,000</button>
           </div>
         </div>
       </div>
 
+      <!-- RESULTS -->
       <div>
+        <!-- KEY STATS -->
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;">
-          <div class="stat-card"><div class="stat-label">Monthly Repayment</div><div class="stat-value yellow" id="monthlyRep">—</div></div>
-          <div class="stat-card red-top"><div class="stat-label">Total Interest Paid</div><div class="stat-value red" id="totalInt">—</div></div>
-          <div class="stat-card green-top"><div class="stat-label">Interest Saved (extra payments)</div><div class="stat-value green" id="intSaved">—</div></div>
+          <div class="stat-card">
+            <div class="stat-label" id="repLabel">Monthly Repayment</div>
+            <div class="stat-value green" id="repaymentAmt">—</div>
+          </div>
+          <div class="stat-card red-top">
+            <div class="stat-label">Total Interest</div>
+            <div class="stat-value red" id="totalInt">—</div>
+          </div>
+          <div class="stat-card green-top">
+            <div class="stat-label">Interest Saved</div>
+            <div class="stat-value green" id="intSaved">—</div>
+          </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
-          <div class="stat-card blue-top"><div class="stat-label">Total Amount Repaid</div><div class="stat-value" id="totalPaid" style="font-size:1.2rem;">—</div></div>
-          <div class="stat-card"><div class="stat-label">Payoff Time</div><div class="stat-value yellow" id="payoffTime" style="font-size:1.2rem;">—</div></div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;">
+          <div class="stat-card blue-top">
+            <div class="stat-label">Total Repaid</div>
+            <div class="stat-value" id="totalPaid" style="font-size:1.2rem;">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Payoff Time</div>
+            <div class="stat-value green" id="payoffTime" style="font-size:1.2rem;">—</div>
+          </div>
+          <div class="stat-card green-top">
+            <div class="stat-label">Time Saved vs Monthly</div>
+            <div class="stat-value green" id="timeSaved" style="font-size:1.2rem;">—</div>
+          </div>
         </div>
+
+        <!-- FREQUENCY COMPARISON -->
+        <div class="chart-wrap" style="margin-bottom:1.25rem;">
+          <div class="panel-title">Frequency Comparison</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+            <div style="text-align:center;padding:1rem;background:var(--yellow-pale);border-radius:12px;">
+              <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Monthly</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);" id="cmpMonthly">—</div>
+              <div style="font-size:0.75rem;color:var(--muted);margin-top:0.25rem;" id="cmpMonthlyInt">—</div>
+            </div>
+            <div style="text-align:center;padding:1rem;background:#e8f5e9;border-radius:12px;border:2px solid var(--green-light);">
+              <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Fortnightly</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--green);" id="cmpFort">—</div>
+              <div style="font-size:0.75rem;color:var(--green);margin-top:0.25rem;" id="cmpFortSave">—</div>
+            </div>
+            <div style="text-align:center;padding:1rem;background:#e8f5e9;border-radius:12px;border:2px solid var(--green-light);">
+              <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Weekly</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--green);" id="cmpWeekly">—</div>
+              <div style="font-size:0.75rem;color:var(--green);margin-top:0.25rem;" id="cmpWeeklySave">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHART -->
         <div class="chart-wrap">
           <div class="panel-title">Principal vs Interest Over Time</div>
           <canvas id="repaymentChart" height="200"></canvas>
         </div>
-        <div class="table-wrap">
+
+        <!-- ONE AD BELOW RESULTS -->
+        <div class="ad-slot" style="height:90px;margin:1.25rem 0;"><!-- Google AdSense code here --> Advertisement</div>
+        <div class="ad-label">Advertisement</div>
+
+        <!-- TABLE -->
+        <div class="table-wrap" style="margin-top:1.25rem;">
           <table>
-            <thead><tr><th>Year</th><th>Balance</th><th>Annual Principal</th><th>Annual Interest</th><th>Cumul. Interest</th></tr></thead>
+            <thead><tr><th>Year</th><th>Balance</th><th id="principalCol">Annual Principal</th><th id="interestCol">Annual Interest</th><th>Cumul. Interest</th></tr></thead>
             <tbody id="repayTable"></tbody>
           </table>
         </div>
@@ -79,19 +149,19 @@
   </div>
 </section>
 
-<!-- INFO SECTION -->
-<section class="section" style="background:#fff;">
+<!-- INFO -->
+<section class="section section-white">
   <div class="container-sm">
-    <h2 class="section-title">How to Use This Calculator</h2>
-    <p style="color:var(--muted);margin-bottom:1rem;">Enter your loan amount, interest rate and term to see your minimum monthly repayment. Then try adding extra monthly payments to see how dramatically they reduce your interest and payoff time.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;">
-      <div style="background:var(--light);border-radius:12px;padding:1.5rem;">
-        <h3 style="font-family:'Playfair Display',serif;color:var(--ink);margin-bottom:0.75rem;">💡 Quick Tip</h3>
-        <p style="font-size:0.9rem;color:var(--muted);">Even an extra $200/month on a $600k loan at 6.2% saves over $80,000 in interest and cuts nearly 5 years off your loan.</p>
+    <h2 class="section-title">Fortnightly vs Monthly — Why It Matters</h2>
+    <p style="color:var(--muted);margin-bottom:1rem;">Switching from monthly to fortnightly repayments is one of the easiest ways to save tens of thousands in interest. Here's why it works:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;">
+      <div style="background:var(--yellow-pale);border-radius:12px;padding:1.5rem;">
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:0.75rem;color:var(--ink);">💡 The Maths</h3>
+        <p style="font-size:0.9rem;color:var(--muted);">There are 26 fortnights in a year but only 12 months. Paying half your monthly repayment fortnightly means you make the equivalent of 13 monthly payments per year — one extra payment every year, automatically.</p>
       </div>
-      <div style="background:var(--cream);border-radius:12px;padding:1.5rem;">
-        <h3 style="font-family:'Playfair Display',serif;color:var(--ink);margin-bottom:0.75rem;">🏦 Offset Account?</h3>
-        <p style="font-size:0.9rem;color:var(--muted);">Have savings in an offset account? Use our <a href="offset-calculator.html" style="color:var(--blue);font-weight:600;">Offset Calculator</a> instead for even more accurate results.</p>
+      <div style="background:#e8f5e9;border-radius:12px;padding:1.5rem;">
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:0.75rem;color:var(--ink);">🏦 Offset Account?</h3>
+        <p style="font-size:0.9rem;color:var(--muted);">Have savings in an offset account? Use our <a href="offset-calculator.html" style="color:var(--green);font-weight:600;">Offset Calculator</a> for even more accurate results that factor in your offset balance.</p>
       </div>
     </div>
   </div>
@@ -101,38 +171,56 @@
   <div class="footer-grid">
     <div><div class="footer-brand">OffsetCalculator.com.au</div><p class="footer-desc">Australia's free mortgage offset calculator.</p></div>
     <div class="footer-col"><h4>Calculators</h4><a href="offset-calculator.html">Offset Calculator</a><a href="repayment-calculator.html">Repayment Calculator</a><a href="refinance-calculator.html">Refinance Calculator</a></div>
-    <div class="footer-col"><h4>Company</h4><a href="blog.html">Learn</a><a href="contact.html">Contact Us</a></div>
+    <div class="footer-col"><h4>Links</h4><a href="blog.html">Learn</a><a href="contact.html">Contact Us</a><a href="disclaimer.html">Disclaimer</a></div>
   </div>
-  <div class="disclaimer"><strong>Not Financial Advice:</strong> General information and estimates only. Not a substitute for professional advice. <a href="disclaimer.html" style="color:#5a8aaa;">Full Disclaimer →</a></div>
-  <div class="footer-bottom"><span>© 2025 OffsetCalculator.com.au</span><span><a href="disclaimer.html" style="color:#4a6a8a;">Disclaimer</a> · Privacy Policy · Terms of Use</span></div>
+  <div class="disclaimer"><strong>Not Financial Advice:</strong> General information and estimates only. Not a substitute for professional advice. <a href="disclaimer.html" style="color:#5a5a7a;">Full Disclaimer →</a></div>
+  <div class="footer-bottom"><span>© 2025 OffsetCalculator.com.au</span><span><a href="disclaimer.html" style="color:#5a5a7a;">Disclaimer</a> · Privacy Policy · Terms of Use</span></div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 let chart;
+let currentFreq = 'monthly';
 const fmt = n => '$' + Math.round(n).toLocaleString('en-AU');
 const fmtK = n => '$' + (n/1000).toFixed(0) + 'k';
 
-function calcRepayment(loan, rate, termYears, extra) {
-  const r = rate / 100 / 12, n = termYears * 12;
+// Periods per year for each frequency
+const periodsPerYear = { monthly: 12, fortnightly: 26, weekly: 52 };
+const freqLabel = { monthly: 'Monthly', fortnightly: 'Fortnightly', weekly: 'Weekly' };
+
+function calcForFreq(loan, annualRate, termYears, extra, freq) {
+  const ppy = periodsPerYear[freq];
+  const r = annualRate / 100 / ppy;
+  const n = termYears * ppy;
   const basePayment = loan * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
   const totalPayment = basePayment + extra;
-  let balance = loan, ti = 0, month = 0;
+  let balance = loan, ti = 0, period = 0;
   const yearData = [];
   let annPrincipal = 0, annInterest = 0;
-  while (balance > 0.01 && month < n + 120) {
+  while (balance > 0.01 && period < n * 2) {
     const interest = balance * r;
     const principal = Math.min(totalPayment - interest, balance);
     ti += interest; annPrincipal += principal; annInterest += interest;
     balance = Math.max(balance - principal, 0);
-    month++;
-    if (month % 12 === 0 || balance <= 0.01) {
-      yearData.push({ year: Math.ceil(month/12), balance: Math.round(balance), annPrincipal: Math.round(annPrincipal), annInterest: Math.round(annInterest), totalInterest: Math.round(ti) });
+    period++;
+    if (period % ppy === 0 || balance <= 0.01) {
+      yearData.push({ year: Math.ceil(period/ppy), balance: Math.round(balance), annPrincipal: Math.round(annPrincipal), annInterest: Math.round(annInterest), totalInterest: Math.round(ti) });
       annPrincipal = 0; annInterest = 0;
     }
     if (balance <= 0.01) break;
   }
-  return { basePayment, totalPayment, totalInterest: ti, months: month, yearData };
+  return { basePayment, totalPayment, totalInterest: ti, periods: period, years: period/ppy, yearData };
+}
+
+function setFreq(freq, btn) {
+  currentFreq = freq;
+  document.querySelectorAll('.freq-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  // Update labels
+  document.getElementById('repLabel').textContent = freqLabel[freq] + ' Repayment';
+  document.getElementById('principalCol').textContent = 'Annual Principal';
+  document.getElementById('interestCol').textContent = 'Annual Interest';
+  update();
 }
 
 function update() {
@@ -140,24 +228,86 @@ function update() {
   const rate = parseFloat(document.getElementById('interestRate').value)||0;
   const term = parseFloat(document.getElementById('loanTerm').value)||30;
   const extra = parseFloat(document.getElementById('extraRepayment').value)||0;
-  const { basePayment, totalPayment, totalInterest, months, yearData } = calcRepayment(loan, rate, term, extra);
-  const baseResult = calcRepayment(loan, rate, term, 0);
-  const saved = Math.max(baseResult.totalInterest - totalInterest, 0);
-  document.getElementById('monthlyRep').textContent = fmt(totalPayment);
-  document.getElementById('totalInt').textContent = fmt(totalInterest);
+
+  // Current frequency result
+  const result = calcForFreq(loan, rate, term, extra, currentFreq);
+  // Base (no extra) for savings calc
+  const base = calcForFreq(loan, rate, term, 0, currentFreq);
+  const saved = Math.max(base.totalInterest - result.totalInterest, 0);
+
+  // Update main stats
+  document.getElementById('repaymentAmt').textContent = fmt(result.totalPayment);
+  document.getElementById('totalInt').textContent = fmt(result.totalInterest);
   document.getElementById('intSaved').textContent = fmt(saved);
-  document.getElementById('totalPaid').textContent = fmt(loan + totalInterest);
-  document.getElementById('payoffTime').textContent = `${Math.floor(months/12)}y ${months%12}m`;
-  document.getElementById('repayTable').innerHTML = yearData.map(r => `<tr><td>${r.year}</td><td>${fmt(r.balance)}</td><td style="color:var(--green)">${fmt(r.annPrincipal)}</td><td style="color:var(--red)">${fmt(r.annInterest)}</td><td style="color:var(--muted)">${fmt(r.totalInterest)}</td></tr>`).join('');
+  document.getElementById('totalPaid').textContent = fmt(loan + result.totalInterest);
+  const yrs = Math.floor(result.years), mths = Math.round((result.years - yrs) * 12);
+  document.getElementById('payoffTime').textContent = `${yrs}y ${mths}m`;
+
+  // Time saved vs monthly
+  const monthly = calcForFreq(loan, rate, term, 0, 'monthly');
+  const timeSavedYears = monthly.years - result.years;
+  const tsY = Math.floor(Math.abs(timeSavedYears));
+  const tsM = Math.round((Math.abs(timeSavedYears) - tsY) * 12);
+  const tsEl = document.getElementById('timeSaved');
+  if (currentFreq === 'monthly' && extra === 0) {
+    tsEl.textContent = '—';
+  } else {
+    tsEl.textContent = timeSavedYears > 0 ? `${tsY}y ${tsM}m less` : '—';
+    tsEl.style.color = timeSavedYears > 0 ? 'var(--green)' : 'var(--muted)';
+  }
+
+  // Comparison panel
+  const fort = calcForFreq(loan, rate, term, 0, 'fortnightly');
+  const week = calcForFreq(loan, rate, term, 0, 'weekly');
+  const fyM = Math.floor(monthly.years), fmM = Math.round((monthly.years - fyM)*12);
+  const fyF = Math.floor(fort.years), fmF = Math.round((fort.years - fyF)*12);
+  const fyW = Math.floor(week.years), fmW = Math.round((week.years - fyW)*12);
+  document.getElementById('cmpMonthly').textContent = fmt(monthly.basePayment) + '/mo';
+  document.getElementById('cmpMonthlyInt').textContent = `${fyM}y ${fmM}m · ${fmt(monthly.totalInterest)} interest`;
+  document.getElementById('cmpFort').textContent = fmt(fort.basePayment) + '/fn';
+  document.getElementById('cmpFortSave').textContent = `${fyF}y ${fmF}m · Save ${fmt(monthly.totalInterest - fort.totalInterest)}`;
+  document.getElementById('cmpWeekly').textContent = fmt(week.basePayment) + '/wk';
+  document.getElementById('cmpWeeklySave').textContent = `${fyW}y ${fmW}m · Save ${fmt(monthly.totalInterest - week.totalInterest)}`;
+
+  // Table
+  document.getElementById('repayTable').innerHTML = result.yearData.map(r =>
+    `<tr><td>${r.year}</td><td>${fmt(r.balance)}</td><td style="color:var(--green)">${fmt(r.annPrincipal)}</td><td style="color:var(--red)">${fmt(r.annInterest)}</td><td style="color:var(--muted)">${fmt(r.totalInterest)}</td></tr>`
+  ).join('');
+
+  // Chart
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById('repaymentChart'), {
     type: 'bar',
-    data: { labels: yearData.map(d=>`Yr ${d.year}`), datasets: [{ label: 'Principal', data: yearData.map(d=>d.annPrincipal), backgroundColor: '#4ABDAC', borderRadius: 3 }, { label: 'Interest', data: yearData.map(d=>d.annInterest), backgroundColor: '#FFCE32', borderRadius: 3 }] },
-    options: { responsive: true, plugins: { legend: { labels: { font: { family: 'DM Sans', size: 11 }, color: '#5a6a8a' } } }, scales: { x: { stacked: true, ticks: { font: { family: 'DM Sans', size: 10 }, color: '#5a6a8a', maxTicksLimit: 10 }, grid: { display: false } }, y: { stacked: true, ticks: { font: { family: 'DM Sans', size: 10 }, color: '#5a6a8a', callback: fmtK }, grid: { color: '#eef2fb' } } } }
+    data: {
+      labels: result.yearData.map(d => `Yr ${d.year}`),
+      datasets: [
+        { label: 'Principal', data: result.yearData.map(d=>d.annPrincipal), backgroundColor: '#2E7D32', borderRadius: 3 },
+        { label: 'Interest', data: result.yearData.map(d=>d.annInterest), backgroundColor: '#F7B733', borderRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b80' } } },
+      scales: {
+        x: { stacked: true, ticks: { font: { family: 'DM Sans', size: 10 }, color: '#6b6b80', maxTicksLimit: 10 }, grid: { display: false } },
+        y: { stacked: true, ticks: { font: { family: 'DM Sans', size: 10 }, color: '#6b6b80', callback: fmtK }, grid: { color: '#fff8e1' } }
+      }
+    }
   });
 }
-function applyExtra(val, btn) { document.getElementById('extraRepayment').value = val; document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); update(); }
-document.querySelectorAll('input[type=number]').forEach(el => el.addEventListener('input', () => { document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active')); update(); }));
+
+function applyExtra(val, btn) {
+  document.getElementById('extraRepayment').value = val;
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  update();
+}
+
+document.querySelectorAll('input[type=number]').forEach(el => el.addEventListener('input', () => {
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  update();
+}));
+
 update();
 </script>
 </body>
